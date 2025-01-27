@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +24,8 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
+@AllArgsConstructor
+
 public class PaymentInfo {
 
 	@Id
@@ -35,13 +38,13 @@ public class PaymentInfo {
 	@NotNull
 	private Long appointmentId;
 	
-	@NotNull
+	@NotNull   
 	private String doctorName;
 	
-	@NotNull
+	@NotNull  
 	private String patientName;
 	
-	@NotNull
+	@NotNull  
 	private double paymentTotal;
 	
 	@NotNull

@@ -5,31 +5,35 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "User")
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(callSuper = true)
-public class User {
+
+@Inheritance(strategy = InheritanceType.JOINED) // Strategy for inheritance
+public class User{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long userId;
+	@Column(name = "user_id")
+	private Long Id;
 	
 	@NotNull
-	@Column(name = "user_name", unique = true, nullable = false, length = 100)
+	@Column(name = "user_name",  nullable = false, length = 100)
 	private String userName;
 	
 	@NotNull
+	@Column(name = "user_email", unique = true, nullable = false, length = 100)
 	@Email(message = "Do Enter the Email...!!!")
 	private String userEmail;
 	
@@ -40,6 +44,6 @@ public class User {
 	private String phone_no;
 	
 	@NotNull
-	private USER_ROLE user_role;
+	private User_role user_role;
 
 }

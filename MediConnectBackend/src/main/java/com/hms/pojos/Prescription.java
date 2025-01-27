@@ -1,7 +1,16 @@
 package com.hms.pojos;
 
+import java.util.*;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -15,20 +24,33 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+//@AllArgsConstructor
 public class Prescription {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long Prescription_id ;
+	
+
 	@NotNull
-	private Long doctorId;
+	@ManyToOne
+	@JoinColumn(name = "doctor_id")
+	private Doctor doctorId; //foriengn key 
+	
 	
 	@NotNull
-	private Long appointmentId;
+	@OneToOne
+	@JoinColumn(name = "appoinment_id")
+	private Appointment appointmentId; //foriegn key 
 	
-	@NotNull
-	private Long medicineId;
+//	@NotNull
+	@OneToMany
+	@JoinColumn(name="medicine_id")
+	private List<MedicineRecord> medicineId=new ArrayList<MedicineRecord>(); //foriegn key  //one to many
 	
 	@NotNull
 	@Column(name = "prescription", length = 200)
-	private String prescription;
+	private String prescription_desc; //text
 	
 	@NotNull
 	@Positive

@@ -1,7 +1,6 @@
 package com.hms.pojos;
 
-public enum USER_ROLE {
+public enum User_role {
 	
 	ADMIN, PATIENT, DOCTOR
-
 }
