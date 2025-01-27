@@ -26,7 +26,6 @@ public class MediConnect {
 		
 		.setPropertyCondition(Conditions.isNotNull()) ;
 		
-		
 		return mapper ;
 		
 	}
