@@ -2,7 +2,13 @@ package com.hms.pojos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,33 +20,32 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class Patient {
      
-	@Column(name="Patient_ID")
-	private long PatientID ;
+	@Column(name="patient_ID")
+	private long patientID ;
 	
-	@Column(name="Allergies",length = 50)
+	@Column(name="allergies",length = 50)
 	private String allergies ;
 	
-	@Column(name="Allergies",length = 25)
+	@Column(name="gender",length = 25)
 	private String gender ;
 	
-	@Column(name="Weight")
+	@Column(name="weight")
 	private int weight;
 	
-	@Column(name="BloodGroup",length = 25)
+	@Column(name="bloodGroup",length = 25)
 	private String Bloodgrp;
 	
-	@Column(name="EmergencyContact",length = 25)
+	@Column(name="emergencyContact",length = 25)
 	private String EmergencyContact;
 	
-	@Column(name="Age")
+	@Column(name="age")
 	private int age ;
 	
-	
-	
-	
 }
+	
+
