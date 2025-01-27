@@ -33,16 +33,17 @@ public class MedicalHistory {
 	
 	 @NotNull
 	 @ManyToOne
-	 @JoinColumn(name = "patient_id")
+	 @JoinColumn(name = "patientId")
 	 private Patient patient; // Unidirectional relationship to Patient
 
 	 @NotNull
 	 @ManyToOne
-	 @JoinColumn(name = "doctor_id")
+	 @JoinColumn(name = "doctorId")
 	 private Doctor doctor; // Unidirectional relationship to Doctor
 	
 	@NotNull
 	@OneToOne
+	@JoinColumn(name = "appointmentId")
 	private Appointment appointmentId;
 	
 	@NotNull

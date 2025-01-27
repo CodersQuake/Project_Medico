@@ -34,18 +34,18 @@ public class Prescription {
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "doctor_id")
+	@JoinColumn(name = "doctorId")
 	private Doctor doctorId; //foriengn key 
 	
 	
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "appoinment_id")
+	@JoinColumn(name = "appoinmentId")
 	private Appointment appointmentId; //foriegn key 
 	
 //	@NotNull
 	@OneToMany
-	@JoinColumn(name="medicine_id")
+	@JoinColumn(name="medicineId")
 	private List<MedicineRecord> medicineId=new ArrayList<MedicineRecord>(); //foriegn key  //one to many
 	
 	@NotNull
