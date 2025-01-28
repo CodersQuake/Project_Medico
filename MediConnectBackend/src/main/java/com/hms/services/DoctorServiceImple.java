@@ -20,7 +20,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class DoctorServiceImple implements DoctorServices {
+public class DoctorServiceImple implements DoctorService {
 
 	@Autowired
 	private DoctorDao doctordao;
@@ -86,7 +86,7 @@ public class DoctorServiceImple implements DoctorServices {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
+		
 		return modelMapper.map(doctor, DoctorDto.class);
 
 	}

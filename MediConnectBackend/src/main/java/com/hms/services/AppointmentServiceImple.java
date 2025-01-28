@@ -18,7 +18,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class AppointmentServiceImpl implements AppointmentService {
+public class AppointmentServiceImple implements AppointmentService {
     
     @Autowired
     private AppointmentDao appointmentDao;
@@ -68,6 +68,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     // Deleting an Appointment
     @Override
+
     public String deleteAppointment(Long appointmentId) {
     	if(appointmentDao.findById(appointmentId)!=null) {
           appointmentDao.deleteById(appointmentId);
@@ -78,8 +79,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     		return "appoinment is not exist no " ;
      		
     	}
-    }
-    
+
     
     
     //confusion part about doc id(for admin)
