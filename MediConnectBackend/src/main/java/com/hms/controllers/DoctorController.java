@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hms.dto.DoctorDto;
 import com.hms.pojos.Doctor;
-import com.hms.services.DoctorServices;
+import com.hms.services.DoctorService;
 
 @RestController
 @RequestMapping("/doctors")
 public class DoctorController {
 	
 	@Autowired
-	private DoctorServices doctorService;
+	private DoctorService doctorService;
 	private List<Doctor> doctorList = new ArrayList<>();
 	
 	public DoctorController() {
