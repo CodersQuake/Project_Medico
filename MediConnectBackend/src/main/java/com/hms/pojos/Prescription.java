@@ -32,7 +32,7 @@ public class Prescription {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Prescription_id ;
+	private Long prescription_id ;
 	
 
 	@NotNull
@@ -43,7 +43,7 @@ public class Prescription {
 	
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "appoinmentId")
+	@JoinColumn(name = "appointmentId")
 	private Appointment appointmentId; //foriegn key 
 
 	@NotNull

@@ -9,8 +9,6 @@ import com.hms.pojos.MedicineRecord;
 
 import jakarta.transaction.Transactional;
 
-@Service
-@Transactional
 public interface MedicineService {
 
 	List<MedicineRecordDto> getAllMedicineRecords();

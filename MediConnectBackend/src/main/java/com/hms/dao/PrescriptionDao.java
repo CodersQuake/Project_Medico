@@ -7,6 +7,6 @@ import com.hms.pojos.Prescription;
 public interface PrescriptionDao extends JpaRepository<Prescription, Long>{
 	
 	// Custom query to find Prescription by appointmentId's appointmentNo
-    Prescription findByAppointmentIdAppointmentNo(Long appointmentNo);
+//    Prescription findByAppointmentId(Long appointmentNo);
  
 }

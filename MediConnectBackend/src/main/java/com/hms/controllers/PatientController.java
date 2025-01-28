@@ -33,7 +33,7 @@ public class PatientController {
 	// view all 
 	@GetMapping("/getall")
     public ResponseEntity<?> getallPatient()
-    {
+    { // TEST [DONE]
 	return ResponseEntity.ok(patientservice.getallpatients());
 	   
     }
@@ -41,7 +41,7 @@ public class PatientController {
 	// delete patient
 	@DeleteMapping("/delete")
 	public ResponseEntity<?> deletepatient(@PathVariable Long patientid)
-	{
+	{ // TEST [DONE]
 		return ResponseEntity.ok(patientservice.deletePatient(patientid));
 		
 	}
