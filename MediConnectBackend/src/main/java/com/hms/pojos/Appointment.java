@@ -32,13 +32,13 @@ public class Appointment {
 	private Long appointmentId;
 	
 	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "doctorId")
+
+	@JoinColumn(name = "doctor_id")
 	private Doctor doctorId;
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "patientId")
+	@JoinColumn(name = "patient_id")
 	private Patient patientId;
 	
 	@NotNull
@@ -52,5 +52,8 @@ public class Appointment {
 	@NotNull
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private LocalDateTime appointment_date;
+	
+	
+	//make appoinment method 
 	
 }

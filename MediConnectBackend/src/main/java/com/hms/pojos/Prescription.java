@@ -1,9 +1,12 @@
 package com.hms.pojos;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,7 +27,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 public class Prescription {
 	
 	@Id
@@ -43,6 +46,12 @@ public class Prescription {
 	@JoinColumn(name = "appoinmentId")
 	private Appointment appointmentId; //foriegn key 
 	
+
+	@NotNull
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "medicine_id")
+	private List<MedicineRecord> medicineRecords = new ArrayList<>();
+
 //	@NotNull
 	@OneToMany
 	@JoinColumn(name="medicineId")
