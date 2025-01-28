@@ -76,11 +76,12 @@ public class AppointmentServiceImple implements AppointmentService {
     	}
     	
     	else {
-    		return "appoinment is not exist no " ;
+    		return "appoinment is not exist no ";
      		
     	}
+    	
+    }
 
-    
     
     //confusion part about doc id(for admin)
     @Override

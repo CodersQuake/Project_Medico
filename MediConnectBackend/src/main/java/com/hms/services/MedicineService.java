@@ -22,5 +22,8 @@ public interface MedicineService {
     MedicineRecordDto updateMedicine(Long medicineId, MedicineRecordDto medicineRecordDTO);
 
     void deleteMedicine(Long medicineId);
+    
+    
+    
 	
 }
