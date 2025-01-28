@@ -47,12 +47,6 @@ public class Prescription {
 	private Appointment appointmentId; //foriegn key 
 	
 
-	@NotNull
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "medicine_id")
-	private List<MedicineRecord> medicineRecords = new ArrayList<>();
-
-//	@NotNull
 	@OneToMany
 	@JoinColumn(name="medicineId")
 	private List<MedicineRecord> medicineId=new ArrayList<MedicineRecord>(); //foriegn key  //one to many
