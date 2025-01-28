@@ -49,7 +49,7 @@ public class Prescription {
 
 	@NotNull
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "medicine_id")
+	@JoinColumn(name = "medicineId")
 	private List<MedicineRecord> medicineRecords = new ArrayList<>();
 
 //	@NotNull

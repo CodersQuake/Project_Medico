@@ -2,6 +2,8 @@ package com.hms.pojos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "User")
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -44,6 +46,7 @@ public class User{
 	private String phone_no;
 	
 	@NotNull
+	@Enumerated(EnumType.STRING)
 	private User_role user_role;
 
 }
