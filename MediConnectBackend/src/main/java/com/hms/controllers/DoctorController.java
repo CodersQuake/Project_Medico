@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hms.dto.DoctorDTO;
+import com.hms.dto.DoctorDto;
 import com.hms.pojos.Doctor;
 import com.hms.services.DoctorServices;
 
@@ -38,7 +38,7 @@ public class DoctorController {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
 		
-        List<DoctorDTO> doctorDTOs = new ArrayList<>();
+        List<DoctorDto> doctorDTOs = new ArrayList<>();
         for (Doctor doctor : doctorList) {
             doctorDTOs.add(toDTO(doctor));
         }
@@ -51,7 +51,7 @@ public class DoctorController {
 	
 	// POST NEW DOCTOR
 	@PostMapping
-	public ResponseEntity<?> addNewDoctor(@RequestBody DoctorDTO doctorDTO) {
+	public ResponseEntity<?> addNewDoctor(@RequestBody DoctorDto doctorDTO) {
 		System.out.println("Adding New Doctor Object in DB " + doctorDTO);
         Doctor newDoctor = toEntity(doctorDTO);
         doctorList.add(newDoctor);
@@ -80,7 +80,7 @@ public class DoctorController {
 	
 	// UPDATE DOCTOR
 	@PutMapping("/{categoryId}")
-	public ResponseEntity<?> updateDoctorDetails(@RequestBody DoctorDTO doctorDTO, @PathVariable Long doctorId) {
+	public ResponseEntity<?> updateDoctorDetails(@RequestBody DoctorDto doctorDTO, @PathVariable Long doctorId) {
 		System.out.println("Updating Doctor Details for ID: " + doctorId + ", DTO: " + doctorDTO);
 
         Doctor existingDoctor = doctorList.stream()
@@ -105,8 +105,8 @@ public class DoctorController {
 	}
 	
 	// Entity to DTO
-    private DoctorDTO toDTO(Doctor doctor) {
-        return new DoctorDTO(
+    private DoctorDto toDTO(Doctor doctor) {
+        return new DoctorDto(
                 doctor.getSpecialization(),
                 doctor.getExperience(),
                 doctor.getQualification(),
@@ -118,7 +118,7 @@ public class DoctorController {
     }
     
     // DTO to Entity
-    private Doctor toEntity(DoctorDTO doctorDTO) {
+    private Doctor toEntity(DoctorDto doctorDTO) {
         Doctor doctor = new Doctor();
         doctor.setSpecialization(doctorDTO.getSpecialization());
         doctor.setExperience(doctorDTO.getExperience());

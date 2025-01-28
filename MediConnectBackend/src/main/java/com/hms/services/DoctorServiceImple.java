@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.hms.dao.DoctorDao;
-import com.hms.dto.DoctorDTO;
+import com.hms.dto.DoctorDto;
 import com.hms.exceptions.NoContentException;
 import com.hms.pojos.Doctor;
 
@@ -26,7 +26,7 @@ public class DoctorServiceImple implements DoctorServices {
 	private DoctorDao doctordao;
 	
 	@Autowired
-	private ModelMapper modelmapper;
+	private ModelMapper modelMapper;
 	private Doctor doctor;
 	
 	public DoctorServiceImple() {
@@ -34,12 +34,12 @@ public class DoctorServiceImple implements DoctorServices {
 	}
 	
 	@Override
-	public String addDoctor(DoctorDTO doctor) {
+	public String addDoctor(DoctorDto doctor) {
 		// TODO Auto-generated method stub
 		
 		System.out.println("Adding New Doctor...");
 		
-		Doctor d = doctordao.save(modelmapper.map(doctor, Doctor.class));
+		Doctor d = doctordao.save(modelMapper.map(doctor, Doctor.class));
 		
 		System.out.println(d.getId()+" "+d) ;
 		
@@ -47,10 +47,10 @@ public class DoctorServiceImple implements DoctorServices {
 	}
 
 	@Override
-	public List<DoctorDTO> getAllDoctors() throws NoContentException {
+	public List<DoctorDto> getAllDoctors() throws NoContentException {
 		// TODO Auto-generated method stub
 		
-		List<DoctorDTO> doctors = doctordao.findAll().stream().map(doctor -> modelmapper.map(doctor, DoctorDTO.class)).collect(Collectors.toList());
+		List<DoctorDto> doctors = doctordao.findAll().stream().map(doctor -> modelMapper.map(doctor, DoctorDto.class)).collect(Collectors.toList());
 		if(doctors.size()==0)
 		{
 			throw new NoContentException("No doctor is in System") ;
@@ -75,7 +75,7 @@ public class DoctorServiceImple implements DoctorServices {
 	}
 
 	@Override
-	public DoctorDTO findDoctorById(Long doctorId) {
+	public DoctorDto findDoctorById(Long doctorId) {
 		// TODO Auto-generated method stub
 		
 		Doctor doctor = null;
@@ -86,7 +86,7 @@ public class DoctorServiceImple implements DoctorServices {
 			e.printStackTrace();
 		}
 				
-		return modelmapper.map(doctor, DoctorDTO.class);
+		return modelmapper.map(doctor, DoctorDto.class);
 
 	}
 
