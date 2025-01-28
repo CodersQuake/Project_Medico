@@ -5,7 +5,7 @@ import java.util.List;
 import com.hms.dto.DoctorDto;
 import com.hms.exceptions.NoContentException;
 
-public interface DoctorServices {
+public interface DoctorService {
 	
 	String addDoctor(DoctorDto doctor);
 
