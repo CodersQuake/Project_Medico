@@ -22,13 +22,11 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(callSuper = true)
-
+@ToString
 public class MedicineRecord {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "medicineId")
 	private Long medicineId;
 	
 	@Positive

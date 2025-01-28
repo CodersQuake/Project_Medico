@@ -1,6 +1,5 @@
 package com.hms.pojos;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,17 +32,17 @@ public class MedicalHistory {
 	
 	 @NotNull
 	 @ManyToOne
-	 @JoinColumn(name = "patientId")
+	 @JoinColumn(name = "patient_id")
 	 private Patient patient; // Unidirectional relationship to Patient
 
 	 @NotNull
 	 @ManyToOne
-	 @JoinColumn(name = "doctorId")
+	 @JoinColumn(name = "doctor_id")
 	 private Doctor doctor; // Unidirectional relationship to Doctor
 	
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "appointmentId")
+	@JoinColumn(name="appoinment_id")
 	private Appointment appointmentId;
 	
 	@NotNull
