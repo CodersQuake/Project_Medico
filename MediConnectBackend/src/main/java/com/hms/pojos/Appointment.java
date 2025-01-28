@@ -32,7 +32,7 @@ public class Appointment {
 	private Long appointmentId;
 	
 	@NotNull
-	@ManyToOne
+
 	@JoinColumn(name = "doctor_id")
 	private Doctor doctorId;
 	
@@ -42,7 +42,9 @@ public class Appointment {
 	private Patient patientId;
 	
 	@NotNull
-	private boolean payment_status; //do emum here pending , completed,fialed
+	@OneToOne
+	@JoinColumn(name = "paymentStatus")
+	private PaymentInfo payment_status; //do emum here pending , completed,fialed
 	
 	@NotNull
 	private String medical_problem;

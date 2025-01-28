@@ -37,19 +37,25 @@ public class Prescription {
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "doctor_id")
+	@JoinColumn(name = "doctorId")
 	private Doctor doctorId; //foriengn key 
 	
 	
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "appoinment_id")
+	@JoinColumn(name = "appoinmentId")
 	private Appointment appointmentId; //foriegn key 
 	
+
 	@NotNull
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "medicine_id")
 	private List<MedicineRecord> medicineRecords = new ArrayList<>();
+
+//	@NotNull
+	@OneToMany
+	@JoinColumn(name="medicineId")
+	private List<MedicineRecord> medicineId=new ArrayList<MedicineRecord>(); //foriegn key  //one to many
 	
 	@NotNull
 	@Column(name = "prescription", length = 200)
