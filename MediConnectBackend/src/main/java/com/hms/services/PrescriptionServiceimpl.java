@@ -35,6 +35,8 @@ public class PrescriptionServiceimpl implements PrescriptionService {
 	    // Return success message with saved Prescription's ID
 	    return "Prescription added successfully with ID: " + savedPrescription.getPrescription_id();
 	}
+	    
+	    
 	    @Override
 	    public String deletePrescription(Long prescriptionId) throws PrescriptionNotFoundException {
 	        // Check if the prescription exists
@@ -48,19 +50,12 @@ public class PrescriptionServiceimpl implements PrescriptionService {
 	    }
 
 	
-
-
-
 	@Override
 	public PrescriptionDto getpriscriptionbyappno(Long appointmentno) throws PrescriptionNotFoundException {
 	    // Fetch Prescription using the appointment number
-	    Prescription prescription = prescriptiondao.findByAppointmentIdAppointmentNo(appointmentno);
+	    Prescription prescription = prescriptiondao.findById(appointmentno).orElseThrow(()->new PrescriptionNotFoundException("presciption not found"));
 	    
-	    // Check if prescription exists
-	    if (prescription == null) {
-	        throw new PrescriptionNotFoundException("Prescription not found for appointment number: " + appointmentno);
-	    }
-	    
+	   
 	    // Use ModelMapper to convert the Prescription entity to PrescriptionDto
 	    PrescriptionDto prescriptionDto = mapper.map(prescription, PrescriptionDto.class);
 	    
