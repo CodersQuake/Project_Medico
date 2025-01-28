@@ -27,6 +27,7 @@ public class MedicineRecord {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="medicineid")
 	private Long medicineId;
 	
 	@Positive

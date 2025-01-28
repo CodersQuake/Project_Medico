@@ -43,7 +43,7 @@ public class MedicalHistory {
 	 @NotNull
 	 @OneToOne
 	 @JoinColumn(name="appoinment_id")
-	 private Appointment appointmentId;
+	 private Appointment appointmentId; 
 	
 	 @NotNull
 	 private String diagnosis;
