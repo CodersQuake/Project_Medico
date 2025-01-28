@@ -3,17 +3,17 @@ package com.hms.pojos;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +25,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
+
 public class Appointment {
 	
 	@Id
@@ -32,7 +33,7 @@ public class Appointment {
 	private Long appointmentId;
 	
 	@NotNull
-
+	@ManyToOne
 	@JoinColumn(name = "doctor_id")
 	private Doctor doctorId;
 	
@@ -42,9 +43,8 @@ public class Appointment {
 	private Patient patientId;
 	
 	@NotNull
-	@OneToOne
-	@JoinColumn(name = "paymentStatus")
-	private PaymentInfo payment_status; //do emum here pending , completed,fialed
+	@Enumerated(EnumType.STRING)
+	private Payment_status payment_status; 
 	
 	@NotNull
 	private String medical_problem;
