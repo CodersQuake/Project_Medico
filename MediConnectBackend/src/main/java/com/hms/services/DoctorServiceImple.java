@@ -27,6 +27,7 @@ public class DoctorServiceImple implements DoctorService {
 	
 	@Autowired
 	private ModelMapper modelMapper;
+	
 	private Doctor doctor;
 	
 	public DoctorServiceImple() {
@@ -85,7 +86,7 @@ public class DoctorServiceImple implements DoctorService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		return modelMapper.map(doctor, DoctorDto.class);
 
 	}

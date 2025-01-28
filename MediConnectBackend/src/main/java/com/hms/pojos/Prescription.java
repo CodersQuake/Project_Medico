@@ -45,7 +45,6 @@ public class Prescription {
 	@OneToOne
 	@JoinColumn(name = "appoinmentId")
 	private Appointment appointmentId; //foriegn key 
-	
 
 	@NotNull
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

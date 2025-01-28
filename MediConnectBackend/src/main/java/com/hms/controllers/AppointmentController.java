@@ -43,18 +43,23 @@ public class AppointmentController {
     
     // Updating Appointment with ID...
     @PutMapping("/{appointmentId}")
-    public ResponseEntity<?> updateAppointment(
-            @PathVariable Long appointmentId,
-            @RequestBody AppointmentDto appointmentDTO) {
+    public ResponseEntity<?> updateAppointment( @PathVariable Long appointmentId, @RequestBody AppointmentDto appointmentDTO) {
         return ResponseEntity.ok(appointmentService.updateAppointment(appointmentId, appointmentDTO));
     }
-    
     
     // Deleting The Appointment...
     @DeleteMapping("/{appointmentId}")
     public ResponseEntity<String> deleteAppointment(@PathVariable Long appointmentId) {
         appointmentService.deleteAppointment(appointmentId);
         return ResponseEntity.ok("Appointment deleted successfully.");
+    }
+    
+    @PutMapping("/{appointmentId}/assignDoctor/{doctorId}")
+    public ResponseEntity<String> assignDoctorToAppointment( @PathVariable Long appointmentId,  @PathVariable Long doctorId) {
+      
+           String response = appointmentService.assignDoctorToAppointment(appointmentId, doctorId);
+            return ResponseEntity.ok(response);
+       
     }
     
 }

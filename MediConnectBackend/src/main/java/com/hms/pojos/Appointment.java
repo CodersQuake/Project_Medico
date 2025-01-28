@@ -52,6 +52,13 @@ public class Appointment {
 	@NotNull
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private LocalDateTime appointment_date;
+
+	public void setDoctor(Doctor doc) {
+		// TODO Auto-generated method stub
+		this.doctorId = doc;
+		//here some confusion regarding doctid type ,expected: long docid
+
+	}
 	
 	
 	//make appoinment method 
