@@ -7,8 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hms.dao.DoctorDao;
 import com.hms.dao.PatientDao;
 import com.hms.dto.PatientDto;
+import com.hms.exceptions.NoResourceFoundException;
+import com.hms.pojos.Doctor;
 import com.hms.pojos.Patient;
 
 import jakarta.transaction.Transactional;
@@ -23,7 +26,7 @@ public class PatientServiceimpl implements PatientService {
 	@Autowired
 	private ModelMapper mapper;
 	
-//	private DoctorDao doctordao;
+	private DoctorDao doctordao;
 	
 	// register patient
 	@Override
@@ -83,7 +86,7 @@ public class PatientServiceimpl implements PatientService {
 //		
 //		Patient p = patientdao.save(mapper.map(patient, Patient.class)) ;
 //		
-//		p.setDoctor(doct);
+//        p.setDoctor(doct);
 //		
 //		return "doctor is assign Succesfully";
 //		

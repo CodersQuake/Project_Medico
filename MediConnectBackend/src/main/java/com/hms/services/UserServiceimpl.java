@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.hms.dao.UserDao;
 import com.hms.dto.UserDto;
+import com.hms.exceptions.NoResourceFoundException;
 import com.hms.pojos.User;
 
 import jakarta.transaction.Transactional;
@@ -26,11 +27,10 @@ public class UserServiceimpl  implements UserService{
 	@Override
 	public String registerUser(UserDto user) {
 		// TODO Auto-generated method stub
-		
 		User u = userdao.save(mapper.map(user, User.class)) ;
 		
 		return "user register succesfully with id"+u.getId();
-	 
+
 	}
 
 	@Override
@@ -60,14 +60,16 @@ public class UserServiceimpl  implements UserService{
 				  .map(user->mapper.map(user, UserDto.class))
 				  .collect(Collectors.toList()) ;
 		
-		
 		return u;
 	}
 
 	@Override
 	public UserDto getUserByUserid(Long userid) {
 		// TODO Auto-generated method stub
-		return null;
+		User u = userdao.findById(userid).orElseThrow(()->new NoResourceFoundException("No user available for this id")) ;
+		
+	
+		return mapper.map(u, UserDto.class);
 	}
 
 }

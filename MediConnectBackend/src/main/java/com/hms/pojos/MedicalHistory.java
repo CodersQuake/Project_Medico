@@ -25,10 +25,10 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class MedicalHistory {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="medicalhistoryid")
-	private Long medHistoryId ;
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 @Column(name="medicalhistoryid")
+	 private Long medHistoryId ;
 	
 	 @NotNull
 	 @ManyToOne
@@ -40,13 +40,13 @@ public class MedicalHistory {
 	 @JoinColumn(name = "doctor_id")
 	 private Doctor doctor; // Unidirectional relationship to Doctor
 	
-	@NotNull
-	@OneToOne
-	@JoinColumn(name="appoinment_id")
-	private Appointment appointmentId;
+	 @NotNull
+	 @OneToOne
+	 @JoinColumn(name="appoinment_id")
+	 private Appointment appointmentId;
 	
-	@NotNull
-	private String diagnosis;
+	 @NotNull
+	 private String diagnosis;
 
 }
 

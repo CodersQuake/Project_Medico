@@ -15,6 +15,8 @@ public interface PatientService {
 
 	String registerPatient(PatientDto patient);
 
+//	String adddoctortopatient(PatientDto patient, Long doctid);
+
 
 }
 

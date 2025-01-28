@@ -37,7 +37,7 @@ public class Patient extends User{
 	
 	@Column(name="age")
 	private int age ;
-	
+
 }
 	
 

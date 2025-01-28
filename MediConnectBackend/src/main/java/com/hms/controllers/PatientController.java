@@ -53,13 +53,7 @@ public class PatientController {
 		
 	}
 	
-//	//assign doctor 
-//	@PostMapping("/{patientid}/assigndoct")
-//	public ResponseEntity<?> assigndoctor(@RequestBody PatientDto patient,@PathVariable Long patientid)
-//	{
-//		return ResponseEntity.status(HttpStatus.CREATED).body(patientservice.adddoctortopatient(patient, patientid));
-//		
-//	}
+
 
 }
 

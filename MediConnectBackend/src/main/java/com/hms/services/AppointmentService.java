@@ -11,9 +11,11 @@ public interface AppointmentService {
     AppointmentDto getAppointmentById(Long appointmentId);
     
     AppointmentDto createAppointment(AppointmentDto appointmentDTO);
-    
-    AppointmentDto updateAppointment(Long appointmentId, AppointmentDto appointmentDTO);
-    
-    void deleteAppointment(Long appointmentId);
+   
+    String deleteAppointment(Long appointmentId);
+
+	AppointmentDto updateAppointment(Long appointmentId, AppointmentDto appointmentDTO);
+
+	String assignDoctorToAppointment(Long appointmentId, Long doctorId);
     
 }

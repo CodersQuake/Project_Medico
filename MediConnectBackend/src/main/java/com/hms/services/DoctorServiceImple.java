@@ -27,6 +27,7 @@ public class DoctorServiceImple implements DoctorServices {
 	
 	@Autowired
 	private ModelMapper modelMapper;
+	
 	private Doctor doctor;
 	
 	public DoctorServiceImple() {
@@ -86,7 +87,7 @@ public class DoctorServiceImple implements DoctorServices {
 			e.printStackTrace();
 		}
 				
-		return modelmapper.map(doctor, DoctorDto.class);
+		return modelMapper.map(doctor, DoctorDto.class);
 
 	}
 

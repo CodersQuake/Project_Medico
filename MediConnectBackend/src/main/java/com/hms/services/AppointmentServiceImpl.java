@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hms.dao.AppointmentDao;
+import com.hms.dao.DoctorDao;
 import com.hms.dto.AppointmentDto;
+import com.hms.exceptions.NoResourceFoundException;
 import com.hms.pojos.Appointment;
+import com.hms.pojos.Doctor;
 
 import jakarta.transaction.Transactional;
 
@@ -19,6 +22,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     
     @Autowired
     private AppointmentDao appointmentDao;
+    
+    
+    @Autowired
+    private DoctorDao doctordao ;
     
     @Autowired
     private ModelMapper modelMapper;
@@ -47,23 +54,51 @@ public class AppointmentServiceImpl implements AppointmentService {
         return modelMapper.map(savedAppointment, AppointmentDto.class);
     }
 
-    // Updating An Appointment...
+    // Updating An Appointment...(for patient)
     @Override
     public AppointmentDto updateAppointment(Long appointmentId, AppointmentDto appointmentDTO) {
         Appointment appointment = appointmentDao.findById(appointmentId)
                 .orElseThrow(() -> new RuntimeException("Appointment Not Found"));
-        appointment.setDoctorId(modelMapper.map(appointmentDTO.getDoctorId(), Appointment.class).getDoctorId());
-        appointment.setPatientId(modelMapper.map(appointmentDTO.getPatientId(), Appointment.class).getPatientId());
+     
         appointment.setMedical_problem(appointmentDTO.getMedicalProblem());
-        appointment.setPayment_status(appointmentDTO.getPaymentStatus());
+
         appointment.setAppointment_date(appointmentDTO.getAppointmentDate());
         return modelMapper.map(appointmentDao.save(appointment), AppointmentDto.class);
     }
 
     // Deleting an Appointment
     @Override
-    public void deleteAppointment(Long appointmentId) {
-        appointmentDao.deleteById(appointmentId);
+    public String deleteAppointment(Long appointmentId) {
+    	if(appointmentDao.findById(appointmentId)!=null) {
+          appointmentDao.deleteById(appointmentId);
+          return "Delete appoinment succesfully";
+    	}
+    	
+    	else {
+    		return "appoinment is not exist no " ;
+     		
+    	}
     }
+    
+    
+    
+    //confusion part about doc id(for admin)
+    @Override
+    public String assignDoctorToAppointment(Long appointmentId, Long doctorId) {
+        // Fetch the appointment by ID
+        Appointment app = appointmentDao.findById(appointmentId).orElseThrow(()->new NoResourceFoundException("Appoinment is not valid"));
+     
 
+        // Fetch the doctor by ID
+        Doctor doct = doctordao.findById(doctorId).orElseThrow(()->new NoResourceFoundException("doctor is not valid"));
+       
+
+        // Assign the doctor to the appointment
+        
+        app.setDoctor(doct);
+        appointmentDao.save(app);
+
+        return "Doctor with ID: " + doctorId + " has been assigned to appointment with ID: " + appointmentId;
+    }
+    
 }
