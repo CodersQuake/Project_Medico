@@ -2,17 +2,17 @@ package com.hms.services;
 
 import java.util.List;
 
-import com.hms.dto.DoctorDTO;
+import com.hms.dto.DoctorDto;
 import com.hms.exceptions.NoContentException;
 
 public interface DoctorServices {
 	
-	String addDoctor(DoctorDTO doctor);
+	String addDoctor(DoctorDto doctor);
 
-	List<DoctorDTO> getAllDoctors() throws NoContentException;
+	List<DoctorDto> getAllDoctors() throws NoContentException;
 
 	String deleteDoctor(Long doctorId) throws NoContentException;
 
-	DoctorDTO findDoctorById(Long doctorId);
+	DoctorDto findDoctorById(Long doctorId);
 	
 }
