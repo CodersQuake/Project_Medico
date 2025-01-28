@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.hms.dao.DoctorDao;
@@ -13,6 +14,12 @@ import com.hms.dto.DoctorDTO;
 import com.hms.exceptions.NoContentException;
 import com.hms.pojos.Doctor;
 
+import jakarta.transaction.Transactional;
+
+
+
+@Service
+@Transactional
 public class DoctorServiceImple implements DoctorServices {
 
 	@Autowired
