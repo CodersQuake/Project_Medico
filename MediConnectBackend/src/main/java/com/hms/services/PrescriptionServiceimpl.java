@@ -50,6 +50,7 @@ public class PrescriptionServiceimpl implements PrescriptionService {
 	    }
 
 	
+
 	@Override
 	public PrescriptionDto getpriscriptionbyappno(Long appointmentno) throws PrescriptionNotFoundException {
 	    // Fetch Prescription using the appointment number

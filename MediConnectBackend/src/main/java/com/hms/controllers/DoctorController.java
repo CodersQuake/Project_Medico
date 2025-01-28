@@ -63,6 +63,7 @@ public class DoctorController {
 	// DELETE DOCTOR
 	@DeleteMapping("/{doctorId}")
 	public ResponseEntity<?> deleteDoctorDetails(@PathVariable Long doctorId) {
+		// TEST [DONE]
         System.out.println("Deleting Doctor Details from DB: " + doctorId);
 
         Doctor doctorToDelete = doctorList.stream()
