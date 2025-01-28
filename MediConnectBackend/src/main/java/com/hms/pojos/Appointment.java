@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -32,14 +33,15 @@ public class Appointment {
 	
 	@NotNull
 	@ManyToOne
-	private Long doctorId;
+	@JoinColumn(name = "doctor_id")
+	private Doctor doctorId;
 	
 	@NotNull
 	@ManyToOne
-	private Long patientId;
+	@JoinColumn(name = "patient_id")
+	private Patient patientId;
 	
 	@NotNull
-	@OneToOne
 	private boolean payment_status; //do emum here pending , completed,fialed
 	
 	@NotNull
@@ -48,5 +50,8 @@ public class Appointment {
 	@NotNull
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private LocalDateTime appointment_date;
+	
+	
+	//make appoinment method 
 	
 }
