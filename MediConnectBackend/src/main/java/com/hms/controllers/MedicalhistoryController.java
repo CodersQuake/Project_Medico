@@ -24,7 +24,6 @@ public class MedicalhistoryController {
     @DeleteMapping("/delete/{historyId}")
     public ResponseEntity<String> deleteHistory(@PathVariable("historyId") Long historyId) {
     	
-      
         String result = medicalHistoryService.deletehistory(historyId);
         
         return ResponseEntity.ok(result);
