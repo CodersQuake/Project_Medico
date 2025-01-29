@@ -1,8 +1,5 @@
 package com.hms.dto;
 
-import java.time.LocalDateTime;
-
-import com.hms.pojos.Payment_status;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,16 +13,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class AppointmentDto {
-	
     private Long appointmentId;
-    
     private Long doctorId;
-    
     private Long patientId;
-    
-    private Payment_status paymentStatus;
-    
-    private String medicalProblem;
-    
-    private LocalDateTime appointmentDate;
+    private String payment_status;
+    private String medical_problem;
+    private String appointment_date;
 }

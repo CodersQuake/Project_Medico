@@ -1,6 +1,6 @@
 package com.hms.pojos;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,9 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,32 +29,37 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long appointmentId;
 	
-	@NotNull
+//	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "doctor_id")
 	private Doctor doctorId;
 	
-	@NotNull
+//	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "patient_id")
 	private Patient patientId;
 	
-	@NotNull
+//	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Payment_status payment_status; 
 	
-	@NotNull
+//	@NotNull
 	private String medical_problem;
 	
-	@NotNull
-	@Temporal(value = TemporalType.TIMESTAMP)
-	private LocalDateTime appointment_date;
+//	@NotNull
+//	@Temporal(value = TemporalType.TIMESTAMP)
+	private LocalDate appointment_date;
 
 	public void setDoctor(Doctor doc) {
 		// TODO Auto-generated method stub
 		this.doctorId = doc;
 		//here some confusion regarding doctid type ,expected: long docid
 
+	}
+
+	public void setPatient(Patient patient) {
+		this.patientId=patient;
+		
 	}
 	
 	

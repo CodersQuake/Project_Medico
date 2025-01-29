@@ -1,7 +1,7 @@
 package com.hms.pojos;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,8 +11,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -29,31 +30,35 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Prescription {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long prescription_id ;
-	
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "doctorId")
-	private Doctor doctorId; //foriengn key 
-	
-	@NotNull
-	@OneToOne
-	@JoinColumn(name = "appointmentId")
-	private Appointment appointmentId; //foriegn key 
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long prescription_id ;
+    
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "docid")
+    private Doctor doctorId; // Foreign key 
+    
+    @NotNull
+    @OneToOne
+    @JoinColumn(name = "appointmentId")
+    private Appointment appointmentId; // Foreign key 
 
-	@OneToMany
-	@JoinColumn(name="medicineid")
-	private List<MedicineRecord> medicineId=new ArrayList<MedicineRecord>(); //foriegn key  //one to many
-	
-	@NotNull
-	@Column(name = "prescription", length = 200)
-	private String prescription_desc; //text
-	
-	@NotNull
-	@Positive
-	private int quantity;
-	
+    // Correct Many-to-Many relationship with MedicineRecord (not Medicine directly)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "prescription_medicine_record", // Join table between Prescription and MedicineRecord
+        joinColumns = @JoinColumn(name = "prescription_id"),
+        inverseJoinColumns = @JoinColumn(name = "medicineid")  // Link to MedicineRecord via medicineid
+    )
+    private Set<MedicineRecord> medicines = new HashSet<>(); // Many medicines can be prescribed
+
+    @NotNull
+    @Column(name = "prescription", length = 200)
+    private String prescription_desc; // Description
+
+    @NotNull
+    @Positive
+    private int quantity;
 }

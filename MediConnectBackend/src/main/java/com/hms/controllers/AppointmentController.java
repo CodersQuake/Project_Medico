@@ -1,6 +1,7 @@
 package com.hms.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +22,14 @@ public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
 	
-	// Retrieving All The Appointments...
-	public ResponseEntity<?> getAllAppointments() {
+	// Retrieving All The Appointments..
+
+    @GetMapping("/getall")
+	public ResponseEntity<?> getAllAppointments(){
+    	
 		return ResponseEntity.ok(appointmentService.getAllAppointments());
+		
 	}
-	
 	
 	// Retrieving single Appointment by ID
     @GetMapping("/{appointmentId}")
@@ -33,28 +37,38 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.getAppointmentById(appointmentId));
     }
     
-    
     // Creating New Appointment...
-    @PostMapping
-    public ResponseEntity<?> createAppointment(@RequestBody AppointmentDto appointmentDto) {
-        return ResponseEntity.ok(appointmentService.createAppointment(appointmentDto));
+//    @PostMapping("/book")
+//    public ResponseEntity<?>createAppointment(@RequestBody AppointmentDto appointmentDto) {
+//        return ResponseEntity.ok(appointmentService.createAppointment(appointmentDto));
+//    }
+
+    @PostMapping("/book")
+    public ResponseEntity<AppointmentDto> createAppointment(@RequestBody AppointmentDto appointmentDTO) {
+        // Validate appointment_date to ensure it is not null or empty
+        if (appointmentDTO.getAppointment_date() == null || appointmentDTO.getAppointment_date().isEmpty()) {
+        	System.out.println("date is emptyy");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        AppointmentDto createdAppointment = appointmentService.createAppointment(appointmentDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdAppointment);
     }
     
-    
-    // Updating Appointment with ID...
-    @PutMapping("/{appointmentId}")
+   // Updating Appointment with ID...
+    @PutMapping("/update/{appointmentId}")
     public ResponseEntity<?> updateAppointment( @PathVariable Long appointmentId, @RequestBody AppointmentDto appointmentDTO) {
         return ResponseEntity.ok(appointmentService.updateAppointment(appointmentId, appointmentDTO));
     }
     
     // Deleting The Appointment...
-    @DeleteMapping("/{appointmentId}")
+    @DeleteMapping("/delete/{appointmentId}")//[done]
     public ResponseEntity<String> deleteAppointment(@PathVariable Long appointmentId) {
         appointmentService.deleteAppointment(appointmentId);
         return ResponseEntity.ok("Appointment deleted successfully.");
     }
     
-    @PutMapping("/{appointmentId}/assignDoctor/{doctorId}")
+    @PutMapping("/{appointmentId}/assignDoctor/{doctorId}")//[done]
     public ResponseEntity<String> assignDoctorToAppointment( @PathVariable Long appointmentId,  @PathVariable Long doctorId) {
       
            String response = appointmentService.assignDoctorToAppointment(appointmentId, doctorId);

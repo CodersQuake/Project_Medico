@@ -18,11 +18,11 @@ import lombok.ToString;
 public class MedicalhistoryDto {
 	
 
-	 private Patient patient; 
+	 private Long patient; 
 
-	 private Doctor doctor; 
+	 private Long doctor; 
 	
-	 private Appointment appointmentId;
+	 private Long appointmentId;
 	 
 	 private String diagnosis;
 

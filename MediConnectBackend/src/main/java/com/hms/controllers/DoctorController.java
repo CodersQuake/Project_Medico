@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hms.dto.DoctorDto;
+import com.hms.exceptions.NoContentException;
 import com.hms.pojos.Doctor;
 import com.hms.services.DoctorService;
 
@@ -25,6 +26,7 @@ public class DoctorController {
 	
 	@Autowired
 	private DoctorService doctorService;
+	
 	private List<Doctor> doctorList = new ArrayList<>();
 	
 	public DoctorController() {
@@ -32,20 +34,25 @@ public class DoctorController {
 	}
 	
 	// GET ALL DOCTORS
-	@GetMapping
-	public ResponseEntity<?> getAllDoctors() {
-		if(doctorList.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
+	@GetMapping("/getall")
+	public ResponseEntity<?> getAllDoctors() throws NoContentException {
 		
-        List<DoctorDto> doctorDTOs = new ArrayList<>();
-        for (Doctor doctor : doctorList) {
-            doctorDTOs.add(toDTO(doctor));
-        }
+		List<DoctorDto> doctorDTOs = doctorService.getAllDoctors();
+		
+		
+//		if(doctorList.isEmpty()) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		
+//        List<DoctorDto> doctorDTOs = new ArrayList<>();
+//        for (Doctor doctor : doctorList) {
+//            doctorDTOs.add(toDTO(doctor));
+//        }
 
         return ResponseEntity.ok(doctorDTOs);
 	}
 
+	
 	
 	
 	
