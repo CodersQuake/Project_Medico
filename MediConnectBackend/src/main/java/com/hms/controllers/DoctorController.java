@@ -28,6 +28,7 @@ public class DoctorController {
 	private DoctorService doctorService;
 	
 //	private List<Doctor> doctorList = new ArrayList<>();
+
 	
 	public DoctorController() {
 		System.out.println("In Const Doctor " + getClass());
@@ -56,6 +57,7 @@ public class DoctorController {
 		DoctorDto doctorDTO = doctorService.findDoctorById(doctorId);
 		return ResponseEntity.ok(doctorDTO);
 	}
+	
 	
 	
 	// POST NEW DOCTOR

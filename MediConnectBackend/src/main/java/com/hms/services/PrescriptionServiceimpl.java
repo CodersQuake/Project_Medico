@@ -49,6 +49,13 @@ public class PrescriptionServiceimpl implements PrescriptionService {
 	        return "Prescription with ID " + prescriptionId + " deleted successfully.";
 	    }
 
+
+		@Override
+		public PrescriptionDto getpriscriptionbyappno(Long appoinmentno) throws PrescriptionNotFoundException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 	
 
 //	@Override

@@ -11,10 +11,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MedicineRecordDto {
 
-	private Long medicineId;
-	
+
 	private double medicinePrice;
 	
 	private String medicineName;
+
+	
+	
+	
 	
 }

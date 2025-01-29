@@ -37,5 +37,6 @@ public class MedicineRecord {
 	@NotNull
 	@Length(min = 2, max = 150)
 	private String name;
+	
 
 }
