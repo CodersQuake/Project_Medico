@@ -34,27 +34,18 @@ public class Prescription {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long prescription_id ;
 	
-
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "doctorId")
 	private Doctor doctorId; //foriengn key 
-	
 	
 	@NotNull
 	@OneToOne
 	@JoinColumn(name = "appointmentId")
 	private Appointment appointmentId; //foriegn key 
 
-	@NotNull
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "medicineId")
-	private List<MedicineRecord> medicineRecords = new ArrayList<>();
-
-//	@NotNull
-
 	@OneToMany
-	@JoinColumn(name="medicineId")
+	@JoinColumn(name="medicineid")
 	private List<MedicineRecord> medicineId=new ArrayList<MedicineRecord>(); //foriegn key  //one to many
 	
 	@NotNull

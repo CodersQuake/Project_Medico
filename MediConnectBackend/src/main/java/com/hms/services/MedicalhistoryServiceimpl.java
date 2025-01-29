@@ -8,6 +8,7 @@ import com.hms.dao.AppointmentDao;
 import com.hms.dao.DoctorDao;
 import com.hms.dao.MedicalHistoryDao;
 import com.hms.dao.PatientDao;
+import com.hms.dto.MedicalhistoryDto;
 import com.hms.exceptions.NoResourceFoundException;
 import com.hms.pojos.Appointment;
 import com.hms.pojos.Doctor;
@@ -19,7 +20,7 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class MedicalhistoryServiceimpl implements MedicalhistoryService {
-	
+
 	
 	@Autowired
 	private AppointmentDao appoinmentdao ;
@@ -38,30 +39,56 @@ public class MedicalhistoryServiceimpl implements MedicalhistoryService {
 	private MedicalHistoryDao historydao ;
       
 	
+	
+//	 public MedicalHistory addHistory(Long patientId, Long doctorId, Long appointmentId, String diagnosis) {
+//
+//	        // Fetch the required entities using the IDs
+//	        Patient patient = patientdao.findById(patientId)
+//	                .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + patientId));
+//	       
+//	        Doctor doctor = doctordao.findById(doctorId)
+//	                .orElseThrow(() -> new RuntimeException("Doctor not found with ID: " + doctorId));
+//	        
+//	        Appointment appointment = appoinmentdao.findById(appointmentId)
+//	                .orElseThrow(() -> new RuntimeException("Appointment not found with ID: " + appointmentId));
+//
+//	        // Create a new MedicalHistory object
+//	        MedicalHistory medicalHistory = new MedicalHistory();
+//	        medicalHistory.setPatient(patient);
+//	        medicalHistory.setDoctor(doctor);
+//	        medicalHistory.setAppointmentId(appointment);
+//	        medicalHistory.setDiagnosis(diagnosis);
+//
+//	        // Save the MedicalHistory entity
+//	        return historydao.save(medicalHistory);
+//	    }
+//
+//	
 	@Override
-	 public MedicalHistory addHistory(Long patientId, Long doctorId, Long appointmentId, String diagnosis) {
+	public MedicalHistory addHistory(MedicalhistoryDto historydto) {
 
-	        // Fetch the required entities using the IDs
-	        Patient patient = patientdao.findById(patientId)
-	                .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + patientId));
-	        
-	        Doctor doctor = doctordao.findById(doctorId)
-	                .orElseThrow(() -> new RuntimeException("Doctor not found with ID: " + doctorId));
-	        
-	        Appointment appointment = appoinmentdao.findById(appointmentId)
-	                .orElseThrow(() -> new RuntimeException("Appointment not found with ID: " + appointmentId));
+	    // Fetch the required entities using the IDs
+	    Patient patient = patientdao.findById(historydto.getPatient().getId())
+	            .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + historydto.getPatient().getId()));
 
-	        // Create a new MedicalHistory object
-	        MedicalHistory medicalHistory = new MedicalHistory();
-	        medicalHistory.setPatient(patient);
-	        medicalHistory.setDoctor(doctor);
-	        medicalHistory.setAppointmentId(appointment);
-	        medicalHistory.setDiagnosis(diagnosis);
+	    Doctor doctor = doctordao.findById(historydto.getDoctor().getId())
+	            .orElseThrow(() -> new RuntimeException("Doctor not found with ID: " + historydto.getDoctor().getId()));
 
-	        // Save the MedicalHistory entity
-	        return historydao.save(medicalHistory);
-	    }
+	    Appointment app = appoinmentdao.findById(historydto.getAppointmentId().getAppointmentId())
+	            .orElseThrow(() -> new RuntimeException("Appointment not found with ID: " + historydto.getAppointmentId().getAppointmentId()));
 
+	    // Create a new MedicalHistory object
+	    MedicalHistory medicalHistory = new MedicalHistory();
+	    medicalHistory.setPatient(patient);
+	    medicalHistory.setDoctor(doctor);
+	    medicalHistory.setAppointmentId(app);
+	    medicalHistory.setDiagnosis(historydto.getDiagnosis());
+
+	    // Save the MedicalHistory entity
+	    return historydao.save(medicalHistory);
+	}
+
+	
 	@Override
 	public String deletehistory(Long historyid) 
 	{
