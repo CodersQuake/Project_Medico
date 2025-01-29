@@ -34,12 +34,10 @@ public class Prescription {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Prescription_id ;
 	
-
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "doctorId")
 	private Doctor doctorId; //foriengn key 
-	
 	
 	@NotNull
 	@OneToOne
