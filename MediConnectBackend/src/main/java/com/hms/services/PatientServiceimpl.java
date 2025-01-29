@@ -25,7 +25,7 @@ public class PatientServiceimpl implements PatientService {
 	private PatientDao patientdao;
 	@Autowired
 	private ModelMapper mapper;
-	
+	@Autowired
 	private DoctorDao doctordao;
 	
 	// register patient
