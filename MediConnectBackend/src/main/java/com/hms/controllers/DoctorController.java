@@ -27,103 +27,100 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 	
-	private List<Doctor> doctorList = new ArrayList<>();
+//	private List<Doctor> doctorList = new ArrayList<>();
+
 	
 	public DoctorController() {
 		System.out.println("In Const Doctor " + getClass());
 	}
 	
 	// GET ALL DOCTORS
-	@GetMapping("/getall")
-	public ResponseEntity<?> getAllDoctors() throws NoContentException {
+	@GetMapping
+	public ResponseEntity<List<DoctorDto>> getAllDoctors() throws NoContentException {
 		
-		List<DoctorDto> doctorDTOs = doctorService.getAllDoctors();
+		// TEST [DONE]
 		
-		
-//		if(doctorList.isEmpty()) {
-//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-//		}
-//		
-//        List<DoctorDto> doctorDTOs = new ArrayList<>();
-//        for (Doctor doctor : doctorList) {
-//            doctorDTOs.add(toDTO(doctor));
-//        }
+	    List<DoctorDto> doctorDTO_List = doctorService.getAllDoctors();
+	    
+	    if (doctorDTO_List.isEmpty()) {
+	        return ResponseEntity.noContent().build(); // Returns 204 No Content
+	    }
 
-        return ResponseEntity.ok(doctorDTOs);
+	    return ResponseEntity.ok(doctorDTO_List); // Returns 200 OK with the list
 	}
 
-	
+
+	// FIND DOCTOR BY ID
+	@GetMapping("/search/{doctorId}")
+	public ResponseEntity<?> findDoctor(@PathVariable Long doctorId) {
+		// TEST [DONE]
+		DoctorDto doctorDTO = doctorService.findDoctorById(doctorId);
+		return ResponseEntity.ok(doctorDTO);
+	}
 	
 	
 	
 	// POST NEW DOCTOR
-	@PostMapping
+	@PostMapping("/add")
 	public ResponseEntity<?> addNewDoctor(@RequestBody DoctorDto doctorDTO) {
+		// TEST [DONE]
 		System.out.println("Adding New Doctor Object in DB " + doctorDTO);
         Doctor newDoctor = toEntity(doctorDTO);
-        doctorList.add(newDoctor);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(toDTO(newDoctor));
+//        doctorList.add(newDoctor);
+        DoctorDto addedDoctor = doctorService.addDoctor(doctorDTO);
+        if(addedDoctor == null) {
+            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(addedDoctor);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(addedDoctor);
 	}
 	
 	
 	// DELETE DOCTOR
-	@DeleteMapping("/{doctorId}")
-	public ResponseEntity<?> deleteDoctorDetails(@PathVariable Long doctorId) {
+	@DeleteMapping("/delete/{doctorId}")
+	public ResponseEntity<?> deleteDoctorDetails(@PathVariable Long doctorId) throws NoContentException {
 		// TEST [DONE]
         System.out.println("Deleting Doctor Details from DB: " + doctorId);
 
-        Doctor doctorToDelete = doctorList.stream()
-            .filter(d -> d.getId().equals(doctorId))
-            .findFirst()
-            .orElse(null);
+//        Doctor doctorToDelete = doctorList.stream()
+//            .filter(d -> d.getId().equals(doctorId))
+//            .findFirst()
+//            .orElse(null);
+        
+        String doctorToDelete = doctorService.deleteDoctor(doctorId);
 
-        if (doctorToDelete == null) {
+        if (doctorToDelete == "") {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor not found");
         }
-
-        doctorList.remove(doctorToDelete);
+        
         return ResponseEntity.ok("Doctor deleted successfully");
 	}
 	
 	// UPDATE DOCTOR
-	@PutMapping("/{categoryId}")
+	@PutMapping("/update/{doctorId}")
 	public ResponseEntity<?> updateDoctorDetails(@RequestBody DoctorDto doctorDTO, @PathVariable Long doctorId) {
 		System.out.println("Updating Doctor Details for ID: " + doctorId + ", DTO: " + doctorDTO);
 
-        Doctor existingDoctor = doctorList.stream()
-            .filter(d -> d.getId().equals(doctorId))
-            .findFirst()
-            .orElse(null);
-
-        if (existingDoctor == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor not found");
-        }
-
-        // Update the entity based on the DTO
-        existingDoctor.setSpecialization(doctorDTO.getSpecialization());
-        existingDoctor.setExperience(doctorDTO.getExperience());
-        existingDoctor.setQualification(doctorDTO.getQualification());
-        existingDoctor.setCapacity(doctorDTO.getCapacity());
-        existingDoctor.setUserName(doctorDTO.getName());
-        existingDoctor.setUserEmail(doctorDTO.getEmail());
-        existingDoctor.setPhone_no(doctorDTO.getPhone());
-
-        return ResponseEntity.ok(toDTO(existingDoctor));
+		DoctorDto existingDoctor = doctorService.findDoctorById(doctorId);
+        
+		doctorService.updateDoctor(existingDoctor, doctorDTO);
+		
+        return ResponseEntity.ok(existingDoctor);
 	}
 	
-	// Entity to DTO
-    private DoctorDto toDTO(Doctor doctor) {
-        return new DoctorDto(
-                doctor.getSpecialization(),
-                doctor.getExperience(),
-                doctor.getQualification(),
-                doctor.getCapacity(),
-                doctor.getUserName(),
-                doctor.getUserEmail(),
-                doctor.getPhone_no()
-            );
-    }
+	// Entity to DTO conversion
+	private DoctorDto toDTO(Doctor newDoctor) {
+	    DoctorDto doctorDto = new DoctorDto();
+	    doctorDto.setSpecialization(newDoctor.getSpecialization());
+	    doctorDto.setExperience(newDoctor.getExperience());
+	    doctorDto.setQualification(newDoctor.getQualification());
+	    doctorDto.setCapacity(newDoctor.getCapacity());
+	    doctorDto.setUserName(newDoctor.getUserName());
+	    doctorDto.setUserEmail(newDoctor.getUserEmail());
+	    doctorDto.setPhone_no(newDoctor.getPhone_no());
+	    return doctorDto;
+	}
+
+
     
     // DTO to Entity
     private Doctor toEntity(DoctorDto doctorDTO) {
@@ -132,9 +129,9 @@ public class DoctorController {
         doctor.setExperience(doctorDTO.getExperience());
         doctor.setQualification(doctorDTO.getQualification());
         doctor.setCapacity(doctorDTO.getCapacity());
-        doctor.setUserName(doctorDTO.getName());
-        doctor.setUserEmail(doctorDTO.getEmail());
-        doctor.setPhone_no(doctorDTO.getPhone());
+        doctor.setUserName(doctorDTO.getUserName());
+        doctor.setUserEmail(doctorDTO.getUserEmail());
+        doctor.setPhone_no(doctorDTO.getPhone_no());
         return doctor;
     }
 

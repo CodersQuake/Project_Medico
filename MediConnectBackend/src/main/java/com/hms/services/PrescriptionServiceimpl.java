@@ -49,19 +49,26 @@ public class PrescriptionServiceimpl implements PrescriptionService {
 	        return "Prescription with ID " + prescriptionId + " deleted successfully.";
 	    }
 
+
+		@Override
+		public PrescriptionDto getpriscriptionbyappno(Long appoinmentno) throws PrescriptionNotFoundException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 	
 
-	@Override
-	public PrescriptionDto getpriscriptionbyappno(Long appointmentno) throws PrescriptionNotFoundException {
-	    // Fetch Prescription using the appointment number
-	    Prescription prescription = prescriptiondao.findById(appointmentno).orElseThrow(()->new PrescriptionNotFoundException("presciption not found"));
-	    
-	   
-	    // Use ModelMapper to convert the Prescription entity to PrescriptionDto
-	    PrescriptionDto prescriptionDto = mapper.map(prescription, PrescriptionDto.class);
-	    
-	    // Return the mapped PrescriptionDto
-	    return prescriptionDto;
-	}
+//	@Override
+//	public PrescriptionDto getpriscriptionbyappno(Long appointmentno) throws PrescriptionNotFoundException {
+//	    // Fetch Prescription using the appointment number
+//	    Prescription prescription = prescriptiondao.findById(appointmentno).orElseThrow(()->new PrescriptionNotFoundException("presciption not found"));
+//	    
+//	   
+//	    // Use ModelMapper to convert the Prescription entity to PrescriptionDto
+//	    PrescriptionDto prescriptionDto = mapper.map(prescription, PrescriptionDto.class);
+//	    
+//	    // Return the mapped PrescriptionDto
+//	    return prescriptionDto;
+//	}
 
 }

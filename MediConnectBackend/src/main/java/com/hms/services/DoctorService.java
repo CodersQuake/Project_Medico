@@ -7,12 +7,14 @@ import com.hms.exceptions.NoContentException;
 
 public interface DoctorService {
 	
-	String addDoctor(DoctorDto doctor);
+	DoctorDto addDoctor(DoctorDto doctor);
 
 	List<DoctorDto> getAllDoctors() throws NoContentException;
 
 	String deleteDoctor(Long doctorId) throws NoContentException;
 
 	DoctorDto findDoctorById(Long doctorId);
+	
+	DoctorDto updateDoctor(DoctorDto doctor, DoctorDto updatedDoctor);
 	
 }
