@@ -25,14 +25,15 @@ public class PatientServiceimpl implements PatientService {
 	private PatientDao patientdao;
 	@Autowired
 	private ModelMapper mapper;
-	
+	@Autowired
 	private DoctorDao doctordao;
 	
 	// register patient
 	@Override
 	public String registerPatient(PatientDto patient) {
-		Patient p = patientdao.save(mapper.map(patient, Patient.class));
 
+		Patient p = patientdao.save(mapper.map(patient, Patient.class));
+		
 		return "patient register Succesfully! with id : " + p.getId();
 	}
 

@@ -26,7 +26,7 @@ public class PatientController {
 	//register
 	@PostMapping("/register")
 	public ResponseEntity<?> registerpatient(@RequestBody PatientDto patient)
-	{
+	{	// TEST [DONE]
 		return ResponseEntity.status(HttpStatus.CREATED).body(patientservice.registerPatient(patient)) ;
 	}
 	
@@ -39,7 +39,7 @@ public class PatientController {
     }
 	
 	// delete patient
-	@DeleteMapping("/delete")
+	@DeleteMapping("/delete/{patientid}")
 	public ResponseEntity<?> deletepatient(@PathVariable Long patientid)
 	{ // TEST [DONE]
 		return ResponseEntity.ok(patientservice.deletePatient(patientid));
@@ -49,6 +49,7 @@ public class PatientController {
 	// find patient by id
 	@GetMapping("/{patientid}/patientbyid")
 	public ResponseEntity<?> getpatientbyid(@PathVariable Long patientid){
+		// TEST [DONE]
 		return ResponseEntity.ok(patientservice.getpatientbyid(patientid));
 		
 	}
