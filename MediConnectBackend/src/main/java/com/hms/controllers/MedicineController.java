@@ -1,5 +1,7 @@
 package com.hms.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,30 +22,34 @@ public class MedicineController {
 	@Autowired
 	private MedicineService medicineService;
 	
-	
-    @GetMapping
-    public ResponseEntity<?> getAllMedicines() {
-        return ResponseEntity.ok(medicineService.getAllMedicineRecords());
-    }
 
-    @GetMapping("/{medicineId}")
+    @GetMapping("/getallmedicines") // Ensure it's mapped properly
+    public ResponseEntity<List<MedicineRecordDto>> getAllMedicines() {
+        List<MedicineRecordDto> medicines = medicineService.getAllMedicineRecords();
+        return ResponseEntity.ok(medicines);
+    }
+    
+    
+    @GetMapping("/getmedicine/{medicineId}")
     public ResponseEntity<?> getMedicineById(@PathVariable Long medicineId) {
         return ResponseEntity.ok(medicineService.getMedicineById(medicineId));
     }
+    
 
-    @PostMapping
+    @PostMapping("/addmedicine")
     public ResponseEntity<?> createMedicine(@RequestBody MedicineRecordDto medicineRecordDTO) {
         return ResponseEntity.ok(medicineService.createMedicine(medicineRecordDTO));
     }
 
-    @PostMapping("/{medicineId}")
+    @PostMapping("/updatemedicine/{medicineId}")
     public ResponseEntity<?> updateMedicine(
             @PathVariable Long medicineId,
             @RequestBody MedicineRecordDto medicineRecordDTO) {
         return ResponseEntity.ok(medicineService.updateMedicine(medicineId, medicineRecordDTO));
     }
 
-    @DeleteMapping("/{medicineId}")
+    
+    @DeleteMapping("/delete/{medicineId}")
     public ResponseEntity<String> deleteMedicine(@PathVariable Long medicineId) {
         medicineService.deleteMedicine(medicineId);
         return ResponseEntity.ok("Medicine deleted successfully.");

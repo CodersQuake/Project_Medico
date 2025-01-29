@@ -35,12 +35,11 @@ public class MedicineServiceImple implements MedicineService {
 		return medicineList;
 	}
 	
-	
     @Override
     public MedicineRecordDto getMedicineById(Long medicineId) {
         MedicineRecord medicine = medicineDao.findById(medicineId)
                 .orElseThrow(() -> new RuntimeException("Medicine not found with ID: " + medicineId));
-        return new MedicineRecordDto(medicine.getMedicineId(), medicine.getPrice(), medicine.getName());
+        return new MedicineRecordDto(medicine.getPrice(), medicine.getName());
     }
 
     @Override
@@ -51,7 +50,7 @@ public class MedicineServiceImple implements MedicineService {
         medicine.setName(medicineRecordDTO.getMedicineName());
         
         MedicineRecord savedMedicine = medicineDao.save(medicine);
-        return new MedicineRecordDto(savedMedicine.getMedicineId(), savedMedicine.getPrice(), savedMedicine.getName());
+        return new MedicineRecordDto(savedMedicine.getPrice(), savedMedicine.getName());
     }
 
 
@@ -64,11 +63,12 @@ public class MedicineServiceImple implements MedicineService {
 	    medicine.setName(medicineRecordDTO.getMedicineName());
 	    MedicineRecord updatedMedicine = medicineDao.save(medicine);
 	    
-	    return new MedicineRecordDto(updatedMedicine.getMedicineId(), updatedMedicine.getPrice(), updatedMedicine.getName());
+	    return new MedicineRecordDto(updatedMedicine.getPrice(), updatedMedicine.getName());
 	}
 
     @Override
     public void deleteMedicine(Long medicineId) {
+    	
         if (!medicineDao.existsById(medicineId)) {
             throw new RuntimeException("Medicine not found with ID: " + medicineId);
         }

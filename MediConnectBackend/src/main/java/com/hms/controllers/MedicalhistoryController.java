@@ -19,7 +19,6 @@ public class MedicalhistoryController {
 	
 	
     @Autowired
-    
     private MedicalhistoryService medicalHistoryService;
 
    
