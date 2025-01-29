@@ -21,7 +21,6 @@ import lombok.ToString;
 @AllArgsConstructor
 
 public class Doctor extends User{
-	  
 
 	@Column(name = "specialization", nullable = false, length = 150)
 	@NotNull

@@ -24,9 +24,9 @@ import lombok.ToString;
 @ToString
 public class BaseEntity {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id ;
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private Long id ;
 	
 	@CreationTimestamp
 	private LocalDate createdon ;

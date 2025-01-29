@@ -37,13 +37,13 @@ public class PrecscriptionController {
     }
 
 
-    @GetMapping("/get/{appointmentNo}")
-    public ResponseEntity<PrescriptionDto> getPrescriptionByAppointmentNo(@PathVariable("appointmentNo") Long appointmentNo) {
-        try {
-            PrescriptionDto prescriptionDto = prescriptionService.getpriscriptionbyappno(appointmentNo);
-            return new ResponseEntity<>(prescriptionDto, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping("/get/{appointmentNo}")
+//    public ResponseEntity<PrescriptionDto> getPrescriptionByAppointmentNo(@PathVariable("appointmentNo") Long appointmentNo) {
+//        try {
+////            PrescriptionDto prescriptionDto = prescriptionService.getpriscriptionbyappno(appointmentNo);
+//            return new ResponseEntity<>(prescriptionDto, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//        }
+//    }
 }
