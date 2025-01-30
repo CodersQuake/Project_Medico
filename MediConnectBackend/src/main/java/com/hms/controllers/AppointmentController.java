@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hms.dto.AppointmentDto;
+import com.hms.dto.PatientDto;
 import com.hms.services.AppointmentService;
+import com.hms.services.EmailSendingService;
+import com.hms.services.PatientService;
 
 @RestController
 @RequestMapping("/appointments")
@@ -21,6 +24,12 @@ public class AppointmentController {
 
 	@Autowired
 	private AppointmentService appointmentService;
+	
+	@Autowired
+	private EmailSendingService emailSendingService;
+	
+	@Autowired
+	private PatientService patientService;
 	
 	// Retrieving All The Appointments..
 
@@ -52,6 +61,11 @@ public class AppointmentController {
         }
 
         AppointmentDto createdAppointment = appointmentService.createAppointment(appointmentDTO);
+        
+        PatientDto pat = patientService.getpatientbyid(appointmentDTO.getPatientId());
+        
+        emailSendingService.sendSimpleMessage("mahajanvikrant1704@gmail.com", "Appointment Booking!!!", "Congratulations... VIKRANT MAHAJAN. Your Appointment Has Been Booked With Doctor ID : " + appointmentDTO.getDoctorId());
+        
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAppointment);
     }
     
