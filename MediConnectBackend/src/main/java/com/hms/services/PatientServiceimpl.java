@@ -5,13 +5,12 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hms.dao.DoctorDao;
 import com.hms.dao.PatientDao;
 import com.hms.dto.PatientDto;
-import com.hms.exceptions.NoResourceFoundException;
-import com.hms.pojos.Doctor;
 import com.hms.pojos.Patient;
 
 import jakarta.transaction.Transactional;
@@ -28,13 +27,21 @@ public class PatientServiceimpl implements PatientService {
 	@Autowired
 	private DoctorDao doctordao;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+//	private SecurityConfig securityconfig ;
+	
 	// register patient
 	@Override
 	public String registerPatient(PatientDto patient) {
+			
+		   patient.setPassword(passwordEncoder.encode(patient.getPassword()));
+		   
+		    // Map DTO to Entity and save
+		    Patient p = patientdao.save(mapper.map(patient, Patient.class));
 
-		Patient p = patientdao.save(mapper.map(patient, Patient.class));
-		
-		return "patient register Succesfully! with id : " + p.getId();
+		    return "Patient registered successfully! with ID: " + p.getId();
 	}
 
 	// view all patient

@@ -38,13 +38,13 @@ public class PaymentInfo {
 	@NotNull
 	private Long appointmentId;
 	
-	@NotNull   
+	@NotNull
 	private String doctorName;
 	
 	@NotNull  
 	private String patientName;
 	
-	@NotNull  
+	@NotNull 
 	private double paymentTotal;
 	
 	@NotNull

@@ -15,8 +15,7 @@ import com.hms.dto.PatientDto;
 import com.hms.services.PatientService;
 
 @RestController
-@RequestMapping("/patient")
-
+@RequestMapping("/api/patient")
 public class PatientController {
 	
 	@Autowired

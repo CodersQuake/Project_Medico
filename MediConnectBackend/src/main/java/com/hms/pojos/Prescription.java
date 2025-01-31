@@ -1,19 +1,17 @@
 package com.hms.pojos;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-import jakarta.persistence.CascadeType;
+import java.util.ArrayList;
+import java.util.List;
+
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -47,17 +45,11 @@ public class Prescription {
 //    @NotNull
     @OneToOne
     @JoinColumn(name = "appointmentId")
-    private Appointment appointmentId; // Foreign key 
-
-//    // Correct Many-to-Many relationship with MedicineRecord (not Medicine directly)
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(
-//        name = "prescription_medicine_record", // Join table between Prescription and MedicineRecord
-//        joinColumns = @JoinColumn(name = "prescription_id"),
-//        inverseJoinColumns = @JoinColumn(name = "medicineid")  // Link to MedicineRecord via medicineid
-//    )
-//    private Set<MedicineRecord> medicines = new HashSet<>(); // Many medicines can be prescribed
-
+    private Appointment appointmentId; // Foreign key  
+        
+    @JoinColumn(name = "medicineid")
+    
+    private List<Long> medicines = new ArrayList<>(); // Many medicines can be prescribe
 //    @NotNull
     @OneToMany
     private Set<MedicineRecord> medicines;
