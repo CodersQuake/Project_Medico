@@ -62,10 +62,6 @@ public class AppointmentController {
 
         AppointmentDto createdAppointment = appointmentService.createAppointment(appointmentDTO);
         
-        PatientDto pat = patientService.getpatientbyid(appointmentDTO.getPatientId());
-        
-        emailSendingService.sendSimpleMessage("mahajanvikrant1704@gmail.com", "Appointment Booking!!!", "Congratulations... VIKRANT MAHAJAN. Your Appointment Has Been Booked With Doctor ID : " + appointmentDTO.getDoctorId());
-        
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAppointment);
     }
     
@@ -86,7 +82,13 @@ public class AppointmentController {
     public ResponseEntity<String> assignDoctorToAppointment( @PathVariable Long appointmentId,  @PathVariable Long doctorId) {
       
            String response = appointmentService.assignDoctorToAppointment(appointmentId, doctorId);
-            return ResponseEntity.ok(response);
+           
+//           PatientDto pat = patientService.getpatientbyid(appointmentDTO.getPatientId());
+           AppointmentDto appDTO = appointmentService.getAppointmentById(appointmentId);
+           PatientDto pat = patientService.getpatientbyid(appDTO.getPatientId());
+           
+           emailSendingService.sendSimpleMessage("omchoudhari17@gmail.com", "Appointment Booking!!!", "Hello... Your Appointment Has Been Booked With Doctor ID : " + doctorId);           
+           return ResponseEntity.ok(response);
        
     }
     
