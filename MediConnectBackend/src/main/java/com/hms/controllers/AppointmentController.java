@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hms.dto.AppointmentDto;
+import com.hms.dto.PatientDto;
 import com.hms.services.AppointmentService;
+import com.hms.services.EmailSendingService;
+import com.hms.services.PatientService;
 
 @RestController
 @RequestMapping("/appointments")
@@ -21,6 +24,12 @@ public class AppointmentController {
 
 	@Autowired
 	private AppointmentService appointmentService;
+	
+	@Autowired
+	private EmailSendingService emailSendingService;
+	
+	@Autowired
+	private PatientService patientService;
 	
 	// Retrieving All The Appointments..
 
@@ -52,6 +61,7 @@ public class AppointmentController {
         }
 
         AppointmentDto createdAppointment = appointmentService.createAppointment(appointmentDTO);
+        
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAppointment);
     }
     
@@ -72,7 +82,13 @@ public class AppointmentController {
     public ResponseEntity<String> assignDoctorToAppointment( @PathVariable Long appointmentId,  @PathVariable Long doctorId) {
       
            String response = appointmentService.assignDoctorToAppointment(appointmentId, doctorId);
-            return ResponseEntity.ok(response);
+           
+//           PatientDto pat = patientService.getpatientbyid(appointmentDTO.getPatientId());
+           AppointmentDto appDTO = appointmentService.getAppointmentById(appointmentId);
+           PatientDto pat = patientService.getpatientbyid(appDTO.getPatientId());
+           
+           emailSendingService.sendSimpleMessage("omchoudhari17@gmail.com", "Appointment Booking!!!", "Hello... Your Appointment Has Been Booked With Doctor ID : " + doctorId);           
+           return ResponseEntity.ok(response);
        
     }
     

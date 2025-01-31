@@ -18,7 +18,12 @@ public class PrecscriptionController {
     @PostMapping("/add")
     public ResponseEntity<String> addPrescription(@RequestBody PrescriptionDto prescriptionDto) {
         try {
+        	System.out.println(prescriptionDto);
             String responseMessage = prescriptionService.addPrescription(prescriptionDto);
+            
+            // Sending Mail That Appointment Is Created With Doctor...
+            
+            
             return new ResponseEntity<>(responseMessage, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error adding prescription: " + e.getMessage(), HttpStatus.BAD_REQUEST);

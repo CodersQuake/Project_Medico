@@ -12,9 +12,11 @@
 	<groupId>com.hospital</groupId>
 	<artifactId>hospital</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Hospital_managment</name>
-	<description>hospital managment Application</description>
-	<url />
+
+	<name>Project_Medico</name>
+	<description>Medico - Hospital Appointment Managment Application</description>
+	<url/>
+
 	<licenses>
 		<license />
 	</licenses>
@@ -85,6 +87,11 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>6.4.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-mail</artifactId>
+		    <version>3.1.5</version>
 		</dependency>
 
 		<dependency>

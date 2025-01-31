@@ -1,7 +1,10 @@
 package com.hms.pojos;
 
+
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +22,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "Prescription")
@@ -25,32 +30,35 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Prescription {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long prescription_id ;
+    private Long prescriptionId ;
     
-    @NotNull
+//    @NotNull
     @ManyToOne
-    @JoinColumn(name = "docid")
+    @JoinColumn(name = "doctorId")
     private Doctor doctorId; // Foreign key 
     
-    @NotNull
+//    @NotNull
     @OneToOne
     @JoinColumn(name = "appointmentId")
-    private Appointment appointmentId; // Foreign key 
- 
+    private Appointment appointmentId; // Foreign key  
         
     @JoinColumn(name = "medicineid")
     
-    private List<Long> medicines = new ArrayList<>(); // Many medicines can be prescribed
-
-    @NotNull
+    private List<Long> medicines = new ArrayList<>(); // Many medicines can be prescribe
+//    @NotNull
+    @OneToMany
+    private Set<MedicineRecord> medicines;
+    
+//    @NotNull
     @Column(name = "prescription", length = 200)
-    private String prescription_desc; // Description
+    private String prescriptionDesc; // Description
 
-    @NotNull
-    @Positive
+//    @NotNull
+//    @Positive
     private int quantity;
 }

@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -37,6 +39,10 @@ public class MedicineRecord {
 	@NotNull
 	@Length(min = 2, max = 150)
 	private String name;
+	
+//	@ManyToOne
+//	@JoinColumn(name = "prescription_id")
+//	private Prescription prescription;
 	
 
 }

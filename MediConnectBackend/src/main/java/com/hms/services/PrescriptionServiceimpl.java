@@ -4,9 +4,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hms.dao.AppointmentDao;
 import com.hms.dao.PrescriptionDao;
 import com.hms.dto.PrescriptionDto;
 import com.hms.exceptions.PrescriptionNotFoundException;
+import com.hms.pojos.Appointment;
 import com.hms.pojos.Prescription;
 
 import jakarta.transaction.Transactional;
@@ -20,6 +22,8 @@ public class PrescriptionServiceimpl implements PrescriptionService {
 	@Autowired
 	private PrescriptionDao prescriptiondao ;
 	
+	@Autowired
+	private AppointmentDao appointmentDao;
 	
 	@Autowired
 	private ModelMapper mapper ;
@@ -28,12 +32,16 @@ public class PrescriptionServiceimpl implements PrescriptionService {
 	    public String addPrescription(PrescriptionDto prescriptiondto) {
 	    // Convert PrescriptionDto to Prescription entity
 	    Prescription prescription = mapper.map(prescriptiondto, Prescription.class);
-	    
+	    System.out.println(prescription);
 	    // Save the Prescription entity to the database
+	    
+	    Appointment apt = appointmentDao.getReferenceById(prescriptiondto.getAppointmentId());
+//	    prescriptiondao.save(apt);
+	    
 	    Prescription savedPrescription = prescriptiondao.save(prescription);
 
 	    // Return success message with saved Prescription's ID
-	    return "Prescription added successfully with ID: " + savedPrescription.getPrescription_id();
+	    return "Prescription added successfully with ID: " + savedPrescription.getPrescriptionId();
 	}
 	    
 	    
