@@ -2,6 +2,10 @@ package com.hms.services;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import com.hms.dto.UserDto;
 
 public interface UserService {
@@ -15,12 +19,6 @@ public interface UserService {
 	List<UserDto> getallUser();
 	
 	UserDto getUserByUserid(Long userid);
-	
-	
-
-
-	
-
 
 
 }
