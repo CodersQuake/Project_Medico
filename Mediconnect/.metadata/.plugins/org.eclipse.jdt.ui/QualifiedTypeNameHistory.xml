@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="javax.persistence.Table"/>
+    <fullyQualifiedTypeName name="javax.persistence.Id"/>
+    <fullyQualifiedTypeName name="lombok.Getter"/>
+    <fullyQualifiedTypeName name="javax.transaction.Transactional"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="com.dentalmanagement.dto.MedicalhistoryDto"/>
+    <fullyQualifiedTypeName name="com.dentalmanagement.entity.MedicalHistory"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.autoconfigure.SpringBootApplication"/>
+    <fullyQualifiedTypeName name="com.dentalmanagement.service.MedicalhistoryService"/>
+    <fullyQualifiedTypeName name="com.dentalmanagement.exception.NoResourceFoundException"/>
+    <fullyQualifiedTypeName name="com.dentalmanagement.advice.MyControllerAdvice"/>
+</qualifiedTypeNameHistroy>
