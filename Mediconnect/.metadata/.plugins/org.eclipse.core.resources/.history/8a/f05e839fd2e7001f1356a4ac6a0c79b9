@@ -1,0 +1,5 @@
+package com.dentalmanagement.exception;
+
+public class NoResourceFoundException {
+
+}
